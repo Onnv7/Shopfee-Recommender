@@ -1,0 +1,26 @@
+# Sử dụng base image từ continuumio/anaconda3 với tag main
+FROM continuumio/anaconda3:latest
+
+# Set working directory trong container là /app
+WORKDIR /app
+
+# Copy tất cả file từ thư mục hiện tại (nơi Dockerfile được đặt) vào /app trong container
+COPY . /app
+
+# Tạo một môi trường conda với Python 3.9 và tên là pytorch-cpu
+# RUN conda create --name pytorch-cpu python=3.9 -y
+
+
+# SHELL ["conda", "run", "-n", "pytorch-cpu", "/bin/bash", "-c"]
+# # RUN conda init bash 
+# RUN conda install -y pytorch==1.2.0 torchvision==0.4.0 torchaudio==0.2.0 cpuonly -c pytorch \ 
+#     && conda install -c dglteam/label/th22_cpu dgl \ 
+#     && pip install flask pandas torchdata pydantic
+
+
+EXPOSE 5000
+# Đặt lệnh CMD mặc định cho container để kích hoạt môi trường conda và mở một bash shell
+# CMD ["python", "main.py"]
+CMD ["/bin/sh"]
+# ENTRYPOINT ["python", "main.py"]
+
